@@ -3,7 +3,7 @@ const db = require('../data/db-config')
 module.exports = {
     findProjects,
     findById,
-    get,
+    // getResource,
     findTasks,
     addTask,
     addResource,
@@ -26,28 +26,27 @@ function findTasks(id) {
     .where('project.task_id', '=', id)
 }
 
-// function get() {
+// function getResource() {
 //     return db('resource')
 // }
 
-function get() {
-    return db("resource").then(resource =>
-      resource.map(resc => {
-        return {
-          ...resc,
-        };
-      })
-    );
-  }
+// function get() {
+//     return db("resource").then(resource =>
+//       resource.map(resc => {
+//         return {
+//           ...resc,
+//         };
+//       })
+//     );
+//   }
 
 function addTask(task) {
     return db('task').insert(task, 'id')
 }
 
 function addResource(resource) {
-    return db('resource').insert(resource).then(value => {
-        return get(value)
-    })
+    return db('resource').insert(resource)
+    
 }
 
 function addProject(project) {
